@@ -73,6 +73,21 @@ main .chats_container .chat {
     height: auto;
 }
 
+main .chats_container .chat .media {
+
+    max-width: 10rem;
+    min-width: 10rem;
+    height: min(10rem,10rem);
+}
+
+main .chats_container .chat .media img, video {
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 main .chats_container .chat.received {
     margin-right: auto;
     border-left: 1px solid  #4d4c4c;
@@ -89,6 +104,13 @@ main .chats_container .chat.sent{
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+}
+
+main .chats_container .chat.sent .media {
+    margin-left: auto;
+}
+main .chats_container .chat.received .media {
+    margin-right: auto;
 }
 
 main .chats_container .chat.sent  .chat_header{
@@ -133,7 +155,12 @@ main .chats_container .chat.sent  .chat_body{
 main .chats_container .chat.received  .chat_body{
     text-align: left;
 }
-form {
+
+
+
+
+
+#messageForm {
 
     position: fixed;
     bottom: 0;
@@ -148,7 +175,7 @@ form {
     align-items: center;
 }
 
-form textarea {
+#messageForm textarea {
 
     outline: none;
     padding: 1em;
@@ -163,7 +190,7 @@ form textarea {
     resize: none;
 }
 
-form button[type='submit'] {
+#messageForm button[type='submit'] {
 
     display: inline-block;
     padding: 1.5em 1em;
@@ -181,17 +208,17 @@ form button[type='submit'] {
 }
 
 
-form button[type='submit'].disabled{
+#messageForm button[type='submit'].disabled{
     pointer-events: none;
 }
 
-form button[type='submit']:disabled{
+#messageForm button[type='submit']:disabled{
     pointer-events: none;
     background-color: #4d4c4c;
 }
 
 
-form button {
+#messageForm button[type='submit'] {
 
     display: inline-block;
     padding: 1.5em 1em;
@@ -205,4 +232,116 @@ form button {
     font-size: 1em;
     text-transform: uppercase;
     margin: 0 .4em;
+}
+#messageForm button[type='button'] {
+
+    display: inline-block;
+    padding: 1.5em 1em;
+    outline: none;
+    border: none;
+    border-radius:.4em;
+    background-color: #76d1dd;
+    color: #252525;
+    cursor: pointer;
+    font-weight: 100;
+    font-size: 1em;
+    text-transform: uppercase;
+    margin: 0 .4em;
+}
+
+#messageForm #inputMedia{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    display: none;
+    outline: none;
+
+}
+
+#messageForm .inputMedia  {
+
+    display: inline-block;
+    background-color: #76d1dd;
+    width: 2.5em;
+    height: 2.5em;
+    display: grid;
+    place-items: center;
+    margin: 0 .2em;
+    display: none;
+    
+}
+
+#messageForm .inputMedia svg {
+
+    fill: #252525;
+}
+
+
+
+.media-container {
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: min(100%,300px);
+    height: 20rem;
+    background-color: #1a1816;
+    display: none;
+}
+
+.media-container button[type='submit'] {
+
+    outline: none;
+    float: right;
+    cursor: pointer;
+    margin-right: auto;
+}
+.media-container .media  {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+ .media .media-content {
+
+    width: 100%;
+    height: 70%;
+    padding: .2em;
+    border-radius: 15px;
+    overflow: hidden;
+}
+ .media .media-content img{
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media  .media-descriptions {
+
+    width: 100%;
+    height: 4em;
+    padding: .3em;
+}
+
+.media .media-descriptions textarea {
+
+    width: 100%;
+    height: 100%;
+    resize: none;
+    background-color: #252525;
+    border: 1px groove #535252;
+    outline: none;
+    color: #FFFFFF;
+}
+.media .media-descriptions textarea::placeholder {
+
+    color: #CCCCCC;
 }

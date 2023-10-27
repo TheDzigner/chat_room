@@ -45,6 +45,10 @@ io.on('connection', function (socket) {
         io.emit('new-message', userData);
     });
 
+    socket.on('media-sending',function(media) {
+        io.emit('media-sending',media);
+    })
+
     socket.on('typing', (user) => {
         // Notify other clients that a user is typing
         socket.broadcast.emit('typing', user);
