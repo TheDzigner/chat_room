@@ -121,67 +121,62 @@ inputMedia.addEventListener("change", (event) => {
     mediaContainer.style.display = 'block'
   const selectedFile = event.target.files[0];
      
+//   if (selectedFile) {
+   
+//    
+
+//   }
+
   if (selectedFile) {
-    // const objectURL = URL.createObjectURL(selectedFile)
-    // const mediaSRC = objectURL
-    // mediaContent.src = mediaSRC
+      if (selectedFile.type.startsWith('image/')) {
+        const reader = new FileReader();
 
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-     
-        mediaContent.src  = e.target.result;
-       
-    };
-
-    reader.readAsDataURL(selectedFile);
-
+            reader.onload = function (e) {
+             
+                mediaContent.src  = e.target.result;
+               
+            };
+        
+            reader.readAsDataURL(selectedFile);
+      } else {
+          // The selected file is not an image file
+          console.error('Unsupported file type. Please select an image file.');
+          alert('Unsupported file type. Please select an image file.');
+      }
+  } else {
+      // No file selected
+      console.error('No file selected.');
+      alert('No file selected.');
   }
-
-  // if (selectedFile) {
-  //     if (selectedFile.type.startsWith('audio/')) {
-  //         // It's an audio file
-  //         const objectURL = URL.createObjectURL(selectedFile);
-  //         console.log(objectURL)
-  //         audio.src = objectURL;
-  //         audio.play();
-  //     } else {
-  //         // The selected file is not an audio file
-  //         console.error('Unsupported file type. Please select an audio file.');
-  //     }
-  // } else {
-  //     // No file selected
-  //     console.error('No file selected.');
-  // }
 });
 
 
 mediaContainer.addEventListener('submit',(e) => {
     e.preventDefault();
-   if (mediaDesc && mediaContent.src) {
+    mediaContainer.style.display = 'none'
+   if (mediaDesc.value.trim() && mediaContent.src) {
     const data = {
         mssg: mediaDesc.value,
         src: mediaContent.src,
-        sender : newUser
+        username : newUser
     }
-       socket.emit('media-sending',(data))
-    mediaContainer.style.display = 'none'
+    socket.emit('media-sending',(data))
    }else {
     alert('Please add a media and a descriptions')
    }
 })
 
 socket.on('media-sending',function(media) {
-    console.log(media)
+    
    // Create a new chat element with appropriate class
-   const chatClass = media.sender === newUser ? "sent" : "received";
+   const chatClass = media.username === newUser ? "sent" : "received";
 
 
     media.username === newUser ? "" : sendNotif(media);
   
     // Sanitize the user-generated content before inserting it
     const sanitizedMessage = DOMPurify.sanitize(media.mssg);
-    const sanitizedSender = DOMPurify.sanitize(media.sender);
+    const sanitizedSender = DOMPurify.sanitize(media.username);
     const sanitizedMediaSrc = DOMPurify.sanitize(media.src);
   
     const chatHtml = `
@@ -251,13 +246,14 @@ async function check() {
 }
 
 function sendNotif(data) {
-  check().then((isAllowed) => {
-    if (!isAllowed) {
-      return;
-    }
+    check().then((isAllowed) => {
+        if (!isAllowed) {
+            return;
+        }
 
-    new Notification("New Message !", {
-      body: `${data.mssg}`,
+        new Notification(`New message from ${data.username}`, {
+            body: `${data.mssg}`,
+        });
     });
-  });
 }
+

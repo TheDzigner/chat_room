@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- Include DOMPurify -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.0/purify.min.js"></script>
-      <!-- <script src="/socket.io/socket.io.js"></script> -->
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="chat.js" defer></script>
-    <!-- <script src="https://openroom.netlify.app/socket.io/socket.io.js"></script> -->
-    <!-- <script src="https://2l1hn9x2-5500.use2.devtunnels.ms/socket.io/socket.io.js"></script> -->
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Include DOMPurify -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.0/purify.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
     <title>XayChat</title>
-</head>
-<body>
-    
- <main>
-    <header>
+  </head>
+  <body>
+    <main>
+      <header>
         <h1>XayChat</h1>
-        <p class="user_connected">  </p>
+        <p class="user_connected"></p>
         <div class="notif">
-            <p></p>
+          <p></p>
         </div>
-    </header>
-    <div class="chats_container">
+      </header>
+      <div class="chats_container">
         <!-- <div class="chat sent">
             <div class="chat_header">
                 <h2>johndoe</h2>
@@ -37,35 +40,67 @@
                 </p>
             </div>
         </div> -->
-    </div>
+      </div>
 
-    <form class="media-container">
+      <form class="media-container">
         <div class="media">
-            <div class="media-content">
-                <img>
-            </div>
-            <div class="media-descriptions">
-               <textarea name="" id="" placeholder="Add a media descriptions..."></textarea>
-            </div>
+          <div class="media-content">
+            <img />
+          </div>
+          <div class="media-descriptions">
+            <textarea
+              name=""
+              id=""
+              placeholder="Add a media descriptions..."
+            ></textarea>
+          </div>
         </div>
         <button type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M223.87,114l-168-95.89A16,16,0,0,0,32.93,37.32l31,90.47a.42.42,0,0,0,0,.1.3.3,0,0,0,0,.1l-31,90.67A16,16,0,0,0,48,240a16.14,16.14,0,0,0,7.92-2.1l167.91-96.05a16,16,0,0,0,.05-27.89ZM48,224l0-.09L78.14,136H136a8,8,0,0,0,0-16H78.22L48.06,32.12,48,32l168,95.83Z"></path></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="#000000"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M223.87,114l-168-95.89A16,16,0,0,0,32.93,37.32l31,90.47a.42.42,0,0,0,0,.1.3.3,0,0,0,0,.1l-31,90.67A16,16,0,0,0,48,240a16.14,16.14,0,0,0,7.92-2.1l167.91-96.05a16,16,0,0,0,.05-27.89ZM48,224l0-.09L78.14,136H136a8,8,0,0,0,0-16H78.22L48.06,32.12,48,32l168,95.83Z"
+            ></path>
+          </svg>
         </button>
-    </form>
+      </form>
 
-    
-    <form action="#" id="messageForm">
-        <textarea name="input_message" id="input_message" placeholder="Type here..." required role="text" readonly></textarea>
+      <form action="#" id="messageForm">
+        <textarea
+          name="input_message"
+          id="input_message"
+          placeholder="Type here..."
+          required
+          role="text"
+          readonly
+        ></textarea>
         <button type="submit" role="button">Send</button>
-            <label for="inputMedia" class="inputMedia inputMediaLabel">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M224,152v56a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V152a8,8,0,0,1,16,0v56H208V152a8,8,0,0,1,16,0ZM93.66,85.66,120,59.31V152a8,8,0,0,0,16,0V59.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,85.66Z"></path></svg>
-                <input type="file" name="" id="inputMedia">
-            </label>
+        <label for="inputMedia" class="inputMedia inputMediaLabel">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="#000000"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M224,152v56a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V152a8,8,0,0,1,16,0v56H208V152a8,8,0,0,1,16,0ZM93.66,85.66,120,59.31V152a8,8,0,0,0,16,0V59.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,85.66Z"
+            ></path>
+          </svg>
+          <input
+            type="file"
+            name="inputMedia"
+            id="inputMedia"
+            accept=".jpg, .jpeg, .png"
+          />
+        </label>
         <button type="button" role="alertdialog" id="joinChatBtn">Join</button>
-    </form>
- </main>
-
-
-
-</body>
+      </form>
+    </main>
+  </body>
 </html>
